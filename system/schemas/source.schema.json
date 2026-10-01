@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/personal-cognitive-os/schemas/source.schema.json",
+  "title": "Personal Cognitive OS Source",
+  "description": "Draft v0.1 schema. Metadata for an original artifact; the artifact itself remains immutable input.",
+  "type": "object",
+  "required": ["schema_version", "id", "title", "source_type"],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "source_type": { "type": "string", "enum": ["book", "paper", "article", "presentation", "document", "course_material", "web_page", "conversation", "other"] },
+    "creator": { "type": "string" },
+    "published_at": { "type": "string", "format": "date" },
+    "ingested_at": { "type": "string", "format": "date-time" },
+    "uri": { "type": "string", "format": "uri" },
+    "local_path": { "type": "string", "description": "May reveal private local paths; do not publish source records without review." },
+    "content_hash": { "type": "string" },
+    "language": { "type": "string" },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": true
+}

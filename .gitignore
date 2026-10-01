@@ -1,0 +1,45 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Personal and raw material: keep data outside Git unless explicitly reviewed.
+/data/**
+!/data/**/
+!/data/**/README.md
+/private-data/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# JavaScript
+node_modules/
+
+# Generated indexes, caches, and build artifacts
+/indexes/
+/generated/
+/artifacts/
+.cache/
+*.faiss
+*.index
+
+# Temporary and operating-system files
+*.tmp
+*.temp
+*.log
+*.swp
+*.swo
+*.bak
+.DS_Store
+Thumbs.db
+Desktop.ini

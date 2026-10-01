@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/personal-cognitive-os/schemas/experience.schema.json",
+  "title": "Personal Cognitive OS Experience",
+  "description": "Draft v0.1 schema. A personal event with context, observation, interpretation, and provenance kept distinct.",
+  "type": "object",
+  "required": ["schema_version", "id", "summary", "epistemic_status", "provenance"],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "id": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string", "minLength": 1 },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "context": { "type": "string" },
+    "observations": { "type": "array", "items": { "type": "string" } },
+    "interpretation": { "type": "string" },
+    "outcome_ids": { "type": "array", "items": { "type": "string" } },
+    "epistemic_status": { "type": "string", "enum": ["explicitly_stated", "inferred_from_source", "ai_inference", "user_provided", "experimentally_validated", "uncertain"] },
+    "provenance": { "$ref": "knowledge-object.schema.json#/$defs/provenance" }
+  },
+  "additionalProperties": true
+}

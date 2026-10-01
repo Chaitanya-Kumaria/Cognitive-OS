@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/personal-cognitive-os/schemas/relationship.schema.json",
+  "title": "Personal Cognitive OS Relationship",
+  "description": "Draft v0.1 schema. A typed, evidence-aware relationship between knowledge objects.",
+  "type": "object",
+  "required": ["schema_version", "id", "subject_id", "predicate", "object_id", "epistemic_status", "provenance"],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "id": { "type": "string", "minLength": 1 },
+    "subject_id": { "type": "string", "minLength": 1 },
+    "predicate": { "type": "string", "minLength": 1, "description": "An initially open vocabulary; standardize only after real use." },
+    "object_id": { "type": "string", "minLength": 1 },
+    "rationale": { "type": "string" },
+    "epistemic_status": {
+      "type": "string",
+      "enum": ["explicitly_stated", "inferred_from_source", "ai_inference", "user_provided", "experimentally_validated", "uncertain"]
+    },
+    "provenance": { "$ref": "knowledge-object.schema.json#/$defs/provenance" },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/personal-cognitive-os/schemas/knowledge-object.schema.json",
+  "title": "Personal Cognitive OS Knowledge Object",
+  "description": "Draft v0.1 schema. A typed knowledge item with explicit epistemic status and provenance.",
+  "type": "object",
+  "required": ["schema_version", "id", "type", "title", "epistemic_status", "provenance"],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "id": { "type": "string", "minLength": 1 },
+    "type": {
+      "type": "string",
+      "enum": ["fact", "concept", "framework", "theory", "method", "principle", "heuristic", "example", "experience", "decision", "outcome", "belief", "preference", "hypothesis", "question", "reflection"]
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "epistemic_status": {
+      "type": "string",
+      "enum": ["explicitly_stated", "inferred_from_source", "ai_inference", "user_provided", "experimentally_validated", "uncertain"]
+    },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "supersedes": { "type": "array", "items": { "type": "string" } },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "provenance": {
+      "type": "object",
+      "required": ["origin", "source_refs"],
+      "properties": {
+        "origin": { "type": "string", "enum": ["source", "user", "ai", "experiment", "unknown"] },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["source_id"],
+            "properties": {
+              "source_id": { "type": "string", "minLength": 1 },
+              "locator": { "$ref": "#/$defs/locator" },
+              "quote": { "type": "string" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "method_or_model": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "locator": {
+      "type": "object",
+      "properties": {
+        "page": { "type": "integer", "minimum": 1 },
+        "slide": { "type": "integer", "minimum": 1 },
+        "section": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "start_offset": { "type": "integer", "minimum": 0 },
+        "end_offset": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

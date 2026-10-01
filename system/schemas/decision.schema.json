@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/personal-cognitive-os/schemas/decision.schema.json",
+  "title": "Personal Cognitive OS Decision",
+  "description": "Draft v0.1 schema. A contextual choice that preserves alternatives, rationale, assumptions, and later outcomes.",
+  "type": "object",
+  "required": ["schema_version", "id", "decision_question", "choice", "epistemic_status", "provenance"],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "id": { "type": "string", "minLength": 1 },
+    "decided_at": { "type": "string", "format": "date-time" },
+    "decision_question": { "type": "string", "minLength": 1 },
+    "context": { "type": "string" },
+    "options_considered": { "type": "array", "items": { "type": "string" } },
+    "choice": { "type": "string", "minLength": 1 },
+    "rationale": { "type": "string" },
+    "assumptions": { "type": "array", "items": { "type": "string" } },
+    "outcome_ids": { "type": "array", "items": { "type": "string" } },
+    "epistemic_status": { "type": "string", "enum": ["explicitly_stated", "inferred_from_source", "ai_inference", "user_provided", "experimentally_validated", "uncertain"] },
+    "provenance": { "$ref": "knowledge-object.schema.json#/$defs/provenance" }
+  },
+  "additionalProperties": true
+}
